@@ -1,5 +1,4 @@
 # Shipyard
-
 > The winds and waves are always on the side of the ablest navigators.
 >
 > -- <cite>Edward Gibbon</cite>
@@ -11,6 +10,9 @@ Shipyard is a to-do list application that draws its design very loosely from the
 > -- <cite>David Allen</cite>
   
 ## Data
+> Data dominates. If you've chosen the right data structures and organized things well, the algorithms will almost always be self-evident. Data structures, not algorithms, are central to programming.
+>
+> -- <cite>Rob Pike</cite>
 
 > Your mind is for having ideas, not holding them.  
 >  
@@ -19,22 +21,53 @@ Shipyard is a to-do list application that draws its design very loosely from the
 Shipyard saves your data in JSON files in the `data` directory.
 
 ### To Do List
-
 Upon creation of the first to-do item, `data/todo.json` is created. Here is an example of the object structure:
 ```
 {
-    "title": "An Example Item",
-    "description": "I need to show an example.",
-    "uuid": "",
-    "createdAt": "",
-    "updatedAt": "",
-    "subtasks": []
+    "collected": [
+        {
+            "title": "Purchase more coffee"
+        },
+        {
+            "title": "Spend more time with family"
+        }
+    ],
+    "clarified": [
+        {
+            "title": "Create Shipyard",
+            "intention": "To give people a free, open source to do list software that is loosely based on the princples of GTD.",
+            "uuid": "",
+            "createdAt": "",
+            "updatedAt": "",
+            "actions": [
+                {
+                    "title": "Complete README",
+                    "intention": "To explain the intention and usage of Shipyard.",
+                    "actions": [
+                    ]
+                }
+            ],
+            "notes": []
+        }
+    ],
+    "projects": [
+    ],
+    "someday-maybe": [
+    ],
+    "archive": [
+    ],
+    "trash": [
+    ]
 }
 ```
+Your to-do list is decoupled from any interface. In fact, you can add items by modifying the JSON with any editor. Any Shipyard interface will later append any missing metadata to any items upon your next interaction.
 
-Your to-do list is decoupled from any interface. In fact, you can add items by modifying the JSON with any editor. Any Shipyard interface will append any missing metadata to any items upon your next interaction.
+#### Collected versus Clarified
 
-Sub-tasks are endlessly recursive, as any task can have a set of sub-tasks.
+Shipyard models the to-do list data around the GTD concept of clarifying items.
+
+#### Actions
+`actions` are endlessly recursive, as any task can have a set of actions.
 
 ### Configuration
 Shipyard also saves configuration in a flat JSON file. A default `data/config.json` is present in the project.
@@ -56,3 +89,6 @@ Shipyard also saves configuration in a flat JSON file. A default `data/config.js
   
 ## Contributors
 - Erik August Johnson ([@ErikAugust](https://github.com/ErikAugust))
+
+## License
+This project is licensed under the terms of the Creative Commons Attribution-NonCommercial 2.0 license (CC BY-NC 2.0).
