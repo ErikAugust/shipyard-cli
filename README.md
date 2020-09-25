@@ -92,7 +92,7 @@ Your to-do list is decoupled from any interface. In fact, you can add items by m
 
 #### Collected versus Clarified
 
-Shipyard models the to-do list data around the GTD concept of clarifying items.
+Shipyard models the to-do list data around the GTD concept of clarifying items. Shipyard assists in collecting items easily, but also to get you to clarify what your intentions are.
 
 #### Actions
 `actions` are endlessly recursive, as any task can have a set of actions.
