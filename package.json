@@ -1,5 +1,5 @@
 {
-  "name": "shipyard",
+  "name": "@eaj/shipyard",
   "version": "0.1.0",
   "description": "'Getting Things Done'-inspired productivity (to-do list) system.",
   "main": "index.js",
@@ -11,6 +11,8 @@
     "url": "git+https://github.com/ErikAugust/shipyard.git"
   },
   "keywords": [
+    "ship",
+    "shipyard",
     "to-do",
     "productivity",
     "Getting Things Done"

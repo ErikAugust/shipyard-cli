@@ -1,0 +1,52 @@
+{
+  "name": "@eaj/shipyard-cli",
+  "description": "CLI for Shipyard, the 'Getting Things Done'-inspired productivity (to-do list) system.",
+  "version": "0.1.0",
+  "author": "Erik August Johnson <erik@eaj.io>",
+  "bin": {
+    "ship": "./bin/run"
+  },
+  "bugs": "https://github.com/ErikAugust/shipyard/issues",
+  "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-help": "^3.2.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "@oclif/test": "^1.2.7",
+    "chai": "^4.2.0",
+    "globby": "^10.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/ErikAugust/shipyard",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "ship",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "ErikAugust/shipyard",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}

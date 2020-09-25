@@ -97,8 +97,8 @@ Shipyard models the to-do list data around the GTD concept of clarifying items. 
 #### Actions
 `actions` are endlessly recursive, as any task can have a set of actions.
 
-#### Items
-Items make up to-do lists. The Item class can be found in `shared/Item.js`.
+### Items
+Items make up to-do lists. The Item class can be found in `shared/item.js`.
 
 ### Configuration
 Shipyard also saves configuration in a flat JSON file. A default `data/config.json` is present in the project.
@@ -114,6 +114,17 @@ Shipyard also saves configuration in a flat JSON file. A default `data/config.js
     }
 }
 ```
+
+## Command-line interface (CLI)
+The command-line interface (`ship`) is built using [Oclif](https://oclif.io/). The source lives in the `cli` directory.
+
+Please note: This is currently under heavy construction.
+
+To install the command-line interface:
+`npm install -g @eaj/shipyard-cli`.
+
+### Commands
+`add` - Add a new item to a list. The default list is `inbox`.
 
 ## Roadmap  
   
