@@ -28,30 +28,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`ship hello`](#ship-hello)
+* [`ship add`](#ship-add)
 * [`ship help [COMMAND]`](#ship-help-command)
 
-## `ship hello`
+## `ship add`
 
 Describe the command here
 
 ```
 USAGE
-  $ ship hello
+  $ ship add
 
 OPTIONS
-  -n, --name=name  name to print
-
+  -l, --list=list  list where item is added
 DESCRIPTION
   ...
   Extra documentation goes here
 ```
 
-_See code: [src/commands/hello.js](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/hello.js)_
+_See code: [src/commands/add.js](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/add.js)_
 
 ## `ship help [COMMAND]`
 
-display help for ship
+Display help for ship
 
 ```
 USAGE
