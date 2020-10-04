@@ -18,10 +18,12 @@ Shipyard is a productivity (to-do list) system that draws its design loosely fro
 >  
 > -- <cite>David Allen</cite>
 
-Shipyard saves your data in JSON files in the `data` directory.
+Shipyard saves your data (lists and configuration) in a single JSON file, `shipyard.json`.
 
 ### To Do List
-Upon creation of the first to-do item, `data/lists.json` is created. Here is an example of the object structure:
+Upon creation of the first to-do item, `shipyard.json` is created.
+
+Here is an example of the object structure:
 ```
 {
     "inbox": [
