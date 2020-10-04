@@ -28,18 +28,18 @@ Here is an example of the object structure:
 {
   "list": {
     "inbox": [
-    {
-      "uuid": "3aed8322-af53-4faf-bec0-d70f5e74e2ed",
-      "title": "Purchase a kayak",
-      "intention": "To have a kayak to paddle the local waters.",
-      "createdAt": "2020-09-25T14:15:54.393Z",
-      "updatedAt": "2020-09-25T14:15:54.394Z",
-      "actions": [],
-      "notes": [],
-      "completed": false
-    }
-  ],
-  "projects": [
+      {
+        "uuid": "3aed8322-af53-4faf-bec0-d70f5e74e2ed",
+        "title": "Purchase a kayak",
+        "intention": "To have a kayak to paddle the local waters.",
+        "createdAt": "2020-09-25T14:15:54.393Z",
+        "updatedAt": "2020-09-25T14:15:54.394Z",
+        "actions": [],
+        "notes": [],
+        "completed": false
+      }
+    ],
+    "projects": [
       {
         "uuid": "96784116-47c0-4af4-82b0-adf4a4e61aad",
         "title": "Shipyard",
@@ -61,33 +61,33 @@ Here is an example of the object structure:
         "notes": [],
         "completed": false
       }
-  ],
-  "maybe": [
-    {
-      "uuid": "6d6ce13e-f85d-4ccf-b0ef-93712c32cfde",
-      "title": "Sail to Iceland",
-      "intention": "",
-      "createdAt": "2020-09-25T13:56:51.409Z",
-      "updatedAt": "2020-09-25T13:56:51.409Z",
-      "actions": [],
-      "notes": [],
-      "completed": false
-    }
-  ],
-  "reference": [],
-  "archive": [],
-  "trash": [
-    {
-      "uuid": "d988ea36-2fa3-40a9-9d9a-1c09ab1b8147",
-      "title": "Some waste of time",
-      "intention": "Something that I will feel not necessary.",
-      "createdAt": "2020-09-25T14:01:39.231Z",
-      "updatedAt": "2020-09-25T14:01:39.232Z",
-      "actions": [],
-      "notes": [],
-      "completed": false
-    }
-  ]
+    ],
+    "maybe": [
+      {
+        "uuid": "6d6ce13e-f85d-4ccf-b0ef-93712c32cfde",
+        "title": "Sail to Iceland",
+        "intention": "",
+        "createdAt": "2020-09-25T13:56:51.409Z",
+        "updatedAt": "2020-09-25T13:56:51.409Z",
+        "actions": [],
+        "notes": [],
+        "completed": false
+      }
+    ],
+    "reference": [],
+    "archive": [],
+    "trash": [
+      {
+        "uuid": "d988ea36-2fa3-40a9-9d9a-1c09ab1b8147",
+        "title": "Some waste of time",
+        "intention": "Something that I will feel not necessary.",
+        "createdAt": "2020-09-25T14:01:39.231Z",
+        "updatedAt": "2020-09-25T14:01:39.232Z",
+        "actions": [],
+        "notes": [],
+        "completed": false
+      }
+    ]
   },
   "config": {}
 }
