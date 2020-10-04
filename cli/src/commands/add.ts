@@ -21,6 +21,10 @@ export default class Add extends Command {
     {
       name: 'intention',
       description: 'intention of item'
+    },
+    {
+      name: 'action',
+      description: 'next action to be taken'
     }
   ]
 
@@ -35,21 +39,32 @@ export default class Add extends Command {
       char: 'd',
       multiple: false,
       description: 'due date of item (example: "2020-09-30")'
-    }),
+    })
   }
 
   async run() {
-    const {args, flags} = this.parse(Add);
-    
-    const list: List = loadFile().list;
-    const item = new Item({
-      title: args.title,
-      intention: args.intention,
-      dueDate: flags.dueDate
-    });
-    list[flags.category].push(item);
-    saveList(list);
+    try {
+      const {args, flags} = this.parse(Add);
 
-    this.log(`\n${chalk.underline(args.title)} added to ${chalk.bold(flags.category)}.\n`);
+      // TODO: Prompt user for intention and next action, if missing:
+    
+      const list: List = loadFile().list;
+      const item = new Item({
+        title: args.title,
+        intention: args.intention,
+        dueDate: flags.dueDate
+      });
+      if (args.action) {
+        item.actions = [
+          new Item({ title: args.action })
+        ];
+      }
+      list[flags.category].push(item);
+      saveList(list);
+
+      this.log(`\n${chalk.underline(args.title)} added to ${chalk.bold(flags.category)}.\n`);
+    } catch (error) {
+      this.log(error.message);
+    }
   }
 }

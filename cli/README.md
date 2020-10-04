@@ -29,8 +29,8 @@ USAGE
 # Commands
 <!-- commands -->
 * [`ship add TITLE [INTENTION]`](#ship-add-title-intention)
-* [`ship hello [FILE]`](#ship-hello-file)
 * [`ship help [COMMAND]`](#ship-help-command)
+* [`ship view [LIST OR ITEM]`](#ship-view-list)
 
 ## `ship add TITLE [INTENTION]`
 
@@ -45,31 +45,11 @@ ARGUMENTS
   INTENTION  intention of item
 
 OPTIONS
-  -d, --dueDate=dueDate  due date of item (example: "2020-09-30")
-  -l, --list=list        [default: inbox] list where item will be added
+  -c, --category=category  [default: inbox] category where item will be added
+  -d, --dueDate=dueDate    due date of item (example: "2020-09-30")
 ```
 
 _See code: [src/commands/add.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/add.ts)_
-
-## `ship hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ ship hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ ship hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/hello.ts)_
 
 ## `ship help [COMMAND]`
 
@@ -87,4 +67,15 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `ship view [LIST OR ITEM]`
+
+view a list (by category) or an item (by uuid)
+
+```
+USAGE
+  $ ship view [FILE]
+```
+
+_See code: [src/commands/view.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/view.ts)_
 <!-- commandsstop -->
