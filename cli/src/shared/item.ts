@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 export interface SimpleItem {
   uuid?: string;
   title: string;
+  category?: string;
   intention?: string;
   createdAt?: string;
   updatedAt?: string;
@@ -17,6 +18,7 @@ export interface SimpleItem {
 export default class Item {
   uuid: string;
   title: string;
+  category?: string;
   intention?: string;
   createdAt: Moment;
   updatedAt: Moment;
@@ -28,6 +30,7 @@ export default class Item {
   constructor(item: SimpleItem) {
     this.uuid = item.uuid || uuid();
     this.title = item.title;
+    this.category = item.category || undefined;
     this.intention = item.intention;
     this.createdAt = this.getMoment(item.createdAt);
     this.updatedAt = this.getMoment(item.updatedAt);

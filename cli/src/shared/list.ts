@@ -1,10 +1,12 @@
-import Item from './item';
+import Item, {SimpleItem} from './item';
 
-export default interface List {
-  [inbox: string]: Array<Item>;
-  projects: Array<Item>;
-  maybe: Array<Item>;
-  reference: Array<Item>;
-  archive: Array<Item>;
-  trash: Array<Item>;
+/**
+ * Retrieves items by category
+ * @author Erik August Johnson <erik@eaj.io>
+ * @param {Array<Item> list 
+ * @param <string> category 
+ */
+export function getItemsByCategory(list: Array<Item>, category: string): Array<Item> {
+  const condition = (element: Item) => element.category?.toLowerCase() === category.toLowerCase();
+  return list.filter(condition);
 }

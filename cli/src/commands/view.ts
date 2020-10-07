@@ -1,6 +1,7 @@
 import {Command, flags} from '@oclif/command';
-import {getCategoryTable} from '../shared/table';
+import {getTable} from '../shared/table';
 import {loadFile} from '../shared/file';
+import {getItemsByCategory} from '../shared/list';
 
 /**
  * @class View
@@ -9,15 +10,24 @@ import {loadFile} from '../shared/file';
 export default class View extends Command {
   static description = 'view a list by category or item by uuid';
   static flags = {};
-  static args = [];
+  static args = [
+    {
+      name: 'category',
+      description: 'category of items',
+      default: 'inbox'
+    }
+  ]
 
   async run() {
     try {
       const {args, flags} = this.parse(View);
-
+      const category = args.category?.toLowerCase();
       const list = loadFile().list;
-
-      const table = getCategoryTable(list, 'inbox');
+      
+      // Display all, if the category is 'all':
+      const items = category === 'all' ? list : getItemsByCategory(list, args.category);
+      const table = getTable(items);
+      this.log(`Displaying ${items.length} items for ${category}...`);
       this.log(table.toString());
     } catch (error) {
       console.error(error);
