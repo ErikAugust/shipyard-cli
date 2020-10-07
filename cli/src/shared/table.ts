@@ -13,18 +13,16 @@ export function getCategoryTable(list: List, category: string = 'inbox') {
     head: [
       chalk.greenBright('uuid'),
       chalk.greenBright('title'),
-      chalk.greenBright('intention'),
       chalk.greenBright('next action')
     ]
   });
   const items = list[category];
   for (let i = 0; i < items.length; i++) {
     const uuid = items[i].uuid.slice(-6);
-    const intention = items[i].intention || '';
     // TODO: Refactor list/item to provide functions to retrieve next action:
     const actions = items[i].actions;
     const action = actions && actions[0] ? actions[0].title : '';
-    table.push([uuid, items[i].title, intention, action]);
+    table.push([uuid, items[i].title, action]);
   }
   return table;
 }
