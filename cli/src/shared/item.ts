@@ -15,6 +15,10 @@ export interface SimpleItem {
   dueDate?: string;
 }
 
+/**
+ * @class Item
+ * @author Erik August Johnson <erik@eaj.io>
+ */
 export default class Item {
   uuid: string;
   title: string;
@@ -40,11 +44,28 @@ export default class Item {
     this.dueDate = item.dueDate ? this.getMoment(item.dueDate) : undefined;
   }
 
+  public addAction(item: Item): void {
+    if (!this.actions) {
+      this.actions = [];
+    }
+    this.actions.push(item);
+  }
+
+  /**
+   * Retrieves the next incomplete action item
+   */
+  public getNextAction(): Item|undefined {
+    if (this.actions && this.actions.length) {
+      const condition: any = (element: Item) => !element.completed;
+      return this.actions.find(condition);
+    }
+  }
+
   /**
    * Retrieves an instance of Moment for a given time
    * @param {string} time 
    */
-  private getMoment(time: string | undefined) {
+  private getMoment(time: string | undefined): Moment {
 		return time ? moment(time) : moment();
 	}
 }
