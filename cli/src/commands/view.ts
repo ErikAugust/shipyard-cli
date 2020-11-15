@@ -1,7 +1,11 @@
-import {Command, flags} from '@oclif/command';
-import {getTable} from '../shared/table';
-import {loadFile} from '../shared/file';
+import {Command} from '@oclif/command';
+import chalk from 'chalk';
+
+import Item from '../shared/item';
 import {getItemsByCategory} from '../shared/list';
+import Shipyard from '../shared/shipyard';
+import {promptToSelectItemFromList} from '../shared/prompt';
+import {getItemTable} from '../shared/table';
 
 /**
  * @class View
@@ -16,20 +20,31 @@ export default class View extends Command {
       description: 'category of items',
       default: 'inbox'
     }
-  ]
+  ];
 
-  async run() {
+  async run(): Promise<void> {
     try {
-      const {args, flags} = this.parse(View);
+      const {args} = this.parse(View);
       const category = args.category?.toLowerCase();
-      const list = loadFile().list;
+      const shipyard = new Shipyard();
+      const list = shipyard.list;
       
-      // Display all, if the category is 'all':
+      // Show all, if the category is 'all':
       const items = category === 'all' ? list : getItemsByCategory(list, args.category);
-      const table = getTable(items);
-      this.log(`Displaying ${items.length} items for ${category}...`);
-      this.log(table.toString());
+      if (!items.length) {
+        this.log(`There are no items for ${chalk.green.bold(category)}.\n`);
+        process.exit(0);
+      }
+
+      this.log(`Listing ${items.length} items for ${chalk.green.bold(category)}...\n`);
+      const itemIndex = await promptToSelectItemFromList(items);
+      const itemToView: Item = items[itemIndex];
+
+      // Displays selected item:
+      getItemTable(itemToView);
+
     } catch (error) {
+      this.log('An error has occurred:');
       console.error(error);
     }
   }

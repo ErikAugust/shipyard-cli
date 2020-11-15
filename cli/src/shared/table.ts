@@ -1,4 +1,6 @@
 import Table = require('cli-table');
+const terminal = require('terminal-kit').terminal;
+
 import chalk from 'chalk';
 import Item from '../shared/item';
 
@@ -8,7 +10,7 @@ import Item from '../shared/item';
  * @param {Array<Item>} items
  * @param {string} category
  */
-export function getTable(items: Array<Item>) {
+export function getTable(items: Array<Item>): Table {
   const table = new Table({
     head: [
       chalk.greenBright('uuid'),
@@ -17,10 +19,32 @@ export function getTable(items: Array<Item>) {
     ]
   });
   for (let i = 0; i < items.length; i++) {
-    const uuid = items[i].uuid.slice(-6);
-    const actions = items[i].actions;
-    const action = actions && actions[0] ? actions[0].title : '';
-    table.push([uuid, items[i].title, action]);
+    const uuid = items[i].uuid.slice(0, 6);
+    const nextAction = items[i].getNextAction()?.title || '';
+    table.push([uuid, items[i].title, nextAction]);
   }
   return table;
+}
+
+export function getItemTable(item: Item): void {
+  // Uses markup:
+  // https://github.com/cronvel/terminal-kit/blob/master/doc/markup.md
+  terminal.table(
+    [
+      [ 'title', `^+${item.title}` ],
+      [ 'intention', `^/${item.intention || ''}` ],
+      [ 'created at', item.createdAt.format('MMMM Do YYYY [at] h:mm:ss a') ],
+      [ 'due date', item.dueDate?.format('MMMM Do YYYY [at] h:mm:ss a') ],
+      [ 'actions', item.actions?.map(action => action.title).join('\n') ]
+    ],
+    {
+      hasBorder: true,
+      contentHasMarkup: true,
+      borderAttr: { color: 'blue' },
+      textAttr: { bgColor: 'default' },
+      firstColumnTextAttr: { color: 'blue' },
+      width: 60,
+      fit: true
+    }
+  );
 }

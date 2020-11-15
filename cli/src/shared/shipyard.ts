@@ -6,7 +6,7 @@ import * as os from 'os';
 // Check for .env configuration file:
 config();
 
-export const PATH: string = process.env.SHIPYARD_PATH || os.homedir() || `${process.cwd()}/shipyard.json`;
+export const PATH: string = process.env.SHIPYARD_PATH || `${os.homedir()}/shipyard.json` || `${process.cwd()}/shipyard.json`;
 
 interface ShipyardConfig {
   created?: string;
@@ -37,6 +37,9 @@ export default class Shipyard {
     this.trash = shipyard.trash.map(item => new Item(item));
   }
 
+  /**
+   * Saves the current Shipyard instance to the Shipyard JSON file
+   */
   public save(): void {
     const shipyard = {
       list: this.list,
@@ -47,6 +50,9 @@ export default class Shipyard {
     writeFileSync(this.path, JSON.stringify(shipyard, null, 2));
   }
 
+  /**
+   * Loads and deserializes the Shipyard JSON file
+   */
   private load(): DeserializedShipyard {
     const file: Buffer = readFileSync(this.path);
     return JSON.parse(file.toString());
