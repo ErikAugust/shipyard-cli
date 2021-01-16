@@ -28,28 +28,63 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`ship add TITLE [INTENTION]`](#ship-add-title-intention)
+* [`ship action [FILE]`](#ship-action-file)
+* [`ship add TITLE [INTENTION] [ACTION]`](#ship-add-title-intention-action)
+* [`ship complete [CATEGORY]`](#ship-complete-category)
 * [`ship help [COMMAND]`](#ship-help-command)
-* [`ship view [LIST OR ITEM]`](#ship-view-list)
+* [`ship note UUID NOTE`](#ship-note-uuid-note)
+* [`ship view [CATEGORY]`](#ship-view-category)
 
-## `ship add TITLE [INTENTION]`
+## `ship action [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ ship action [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/action.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/action.ts)_
+
+## `ship add TITLE [INTENTION] [ACTION]`
 
 add an item to list
 
 ```
 USAGE
-  $ ship add TITLE [INTENTION]
+  $ ship add TITLE [INTENTION] [ACTION]
 
 ARGUMENTS
   TITLE      title of item
   INTENTION  intention of item
+  ACTION     next action to be taken
 
 OPTIONS
   -c, --category=category  [default: inbox] category where item will be added
   -d, --dueDate=dueDate    due date of item (example: "2020-09-30")
+  -u, --url=url            hyperlink relating to item (example: "https://google.com")
 ```
 
 _See code: [src/commands/add.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/add.ts)_
+
+## `ship complete [CATEGORY]`
+
+marks an item complete
+
+```
+USAGE
+  $ ship complete [CATEGORY]
+
+ARGUMENTS
+  CATEGORY  [default: inbox] category of items
+```
+
+_See code: [src/commands/complete.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/complete.ts)_
 
 ## `ship help [COMMAND]`
 
@@ -68,13 +103,31 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `ship view [LIST OR ITEM]`
+## `ship note UUID NOTE`
 
-view a list (by category) or an item (by uuid)
+adds a note to specified item
 
 ```
 USAGE
-  $ ship view [FILE]
+  $ ship note UUID NOTE
+
+ARGUMENTS
+  UUID  id of item
+  NOTE  note to add
+```
+
+_See code: [src/commands/note.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/note.ts)_
+
+## `ship view [CATEGORY]`
+
+view a list by category or item by uuid
+
+```
+USAGE
+  $ ship view [CATEGORY]
+
+ARGUMENTS
+  CATEGORY  [default: inbox] category of items
 ```
 
 _See code: [src/commands/view.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/view.ts)_
