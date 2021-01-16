@@ -1,5 +1,6 @@
 import {expect, test} from '@oclif/test';
 import Item from '../../src/shared/item';
+import {describe} from 'mocha';
 
 describe('Item', () => {
   describe ('new Item()', () => {
@@ -13,7 +14,7 @@ describe('Item', () => {
     
     test.it('generated a valid v4 UUID', () => {
       expect(typeof item.uuid).to.equal('string');
-      const regEx: RegExp = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+      const regEx = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
       expect(regEx.test(item.uuid)).be.true;
     });
 

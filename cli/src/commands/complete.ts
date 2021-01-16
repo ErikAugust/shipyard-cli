@@ -1,4 +1,6 @@
 import {Command} from '@oclif/command';
+import chalk from 'chalk';
+
 import Shipyard from '../shared/shipyard';
 import {getItemsByCategory} from '../shared/list';
 import Item from '../shared/item';
@@ -25,6 +27,25 @@ export default class Complete extends Command {
 
     // Display all, if the category is 'all':
     const items: Array<Item> = category === 'all' ? list : getItemsByCategory(list, args.category);
+
+    if (!items.length) {
+      // Search for a particular item by 'shortcode':
+
+      this.log(`There are no item(s) for ${chalk.green.bold(category)}.\n`);
+      process.exit(0);
+    }
+
+    // Sort by due date:
+    items.sort((a, b) => {
+      if (a.dueDate && b.dueDate) {
+        return a.dueDate?.unix() - b.dueDate?.unix();
+      } else if (a.dueDate && !b.dueDate) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
     const itemsToComplete = await promptToComplete(items);
     itemsToComplete.forEach(item => {
       // Find index:

@@ -28,6 +28,7 @@ export default class Shipyard {
   list: Array<Item>;
   archive: Array<Item>;
   trash: Array<Item>;
+  file!: Buffer;
 
   constructor(path?: string) {
     this.path = path || PATH;
@@ -50,11 +51,30 @@ export default class Shipyard {
     writeFileSync(this.path, JSON.stringify(shipyard, null, 2));
   }
 
+  public findItem(shortUuid: string): Item | undefined {
+    if (this.listHasItem(shortUuid)) {
+      // Shallow find:
+      const condition = (element: Item): boolean => element.uuid.slice(0, 6) === shortUuid;
+      const item = this.list.find(condition);
+      if (item) {
+        return item;
+      }
+      // Deep find:
+      return undefined;
+    } else {
+      return undefined;
+    }
+  }
+
+  public listHasItem(shortUuid: string): boolean {
+    return this.file.toString().indexOf(shortUuid) > -1;
+  }
+
   /**
    * Loads and deserializes the Shipyard JSON file
    */
   private load(): DeserializedShipyard {
-    const file: Buffer = readFileSync(this.path);
-    return JSON.parse(file.toString());
+    this.file = readFileSync(this.path);
+    return JSON.parse(this.file.toString());
   }
 }

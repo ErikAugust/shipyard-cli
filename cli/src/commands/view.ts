@@ -2,7 +2,7 @@ import {Command} from '@oclif/command';
 import chalk from 'chalk';
 
 import Item from '../shared/item';
-import {getItemsByCategory} from '../shared/list';
+import {getItemsByCategory, sortByDueDate} from '../shared/list';
 import Shipyard from '../shared/shipyard';
 import {promptToSelectItemFromList} from '../shared/prompt';
 import {getItemTable} from '../shared/table';
@@ -30,12 +30,15 @@ export default class View extends Command {
       const list = shipyard.list;
       
       // Show all, if the category is 'all':
-      const items = category === 'all' ? list : getItemsByCategory(list, args.category);
+      let items = category === 'all' ? list : getItemsByCategory(list, args.category);
       if (!items.length) {
         this.log(`There are no items for ${chalk.green.bold(category)}.\n`);
         process.exit(0);
       }
 
+      // Sort by due date:
+      items = sortByDueDate(items);
+      
       this.log(`Listing ${items.length} items for ${chalk.green.bold(category)}...\n`);
       const itemIndex = await promptToSelectItemFromList(items);
       const itemToView: Item = items[itemIndex];
