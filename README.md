@@ -49,11 +49,11 @@ To install the command-line interface:
 
 ### Commands
 
-`add` - Add a new item to a list. The default list is `inbox`.
-`complete` - Set item(s) to `completed`, by category or by ID.
-`view` - View a list of items, by category or by `all`.
-`note` - Add a note to an item, by ID.
-`action` - Add an action to an item, by ID.
+- `add` - Add a new item to a list. The default list is `inbox`.
+- `complete` - Set item(s) to `completed`, by category or by ID.
+- `view` - View a list of items, by category or by `all`.
+- `note` - Add a note to an item, by ID.
+- `action` - Add an action to an item, by ID.
 
 ## Roadmap
 
