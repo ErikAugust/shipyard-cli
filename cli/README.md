@@ -28,25 +28,26 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`ship action [FILE]`](#ship-action-file)
+* [`ship action UUID ACTION [INTENTION]`](#ship-action-uuid-action-intention)
 * [`ship add TITLE [INTENTION] [ACTION]`](#ship-add-title-intention-action)
 * [`ship complete [CATEGORY]`](#ship-complete-category)
+* [`ship due UUID DUEDATE`](#ship-due-uuid-duedate)
 * [`ship help [COMMAND]`](#ship-help-command)
 * [`ship note UUID NOTE`](#ship-note-uuid-note)
 * [`ship view [CATEGORY]`](#ship-view-category)
 
-## `ship action [FILE]`
+## `ship action UUID ACTION [INTENTION]`
 
-describe the command here
+adds an action to specified item
 
 ```
 USAGE
-  $ ship action [FILE]
+  $ ship action UUID ACTION [INTENTION]
 
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+ARGUMENTS
+  UUID       id of item
+  ACTION     action to add
+  INTENTION  intention of action
 ```
 
 _See code: [src/commands/action.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/action.ts)_
@@ -85,6 +86,21 @@ ARGUMENTS
 ```
 
 _See code: [src/commands/complete.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/complete.ts)_
+
+## `ship due UUID DUEDATE`
+
+adds/modifies/removes a due date from specified item
+
+```
+USAGE
+  $ ship due UUID DUEDATE
+
+ARGUMENTS
+  UUID     id of item
+  DUEDATE  due date to add/update ("YYYY-MM-DD", use "none" to remove)
+```
+
+_See code: [src/commands/due.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/due.ts)_
 
 ## `ship help [COMMAND]`
 
