@@ -34,7 +34,7 @@ export default class Note extends Command {
       // Find item by ID:
       const item: Item | undefined = shipyard.findItem(shortUuid);
       if (!item) {
-        this.log(`There are no item found for ${chalk.green.bold(shortUuid)}.\n`);
+        this.log(`There are no items found for ${chalk.green.bold(shortUuid)}.\n`);
         process.exit(0);
       } else {
         // Add note and save list:

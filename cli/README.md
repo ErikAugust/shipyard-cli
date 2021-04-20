@@ -34,6 +34,7 @@ USAGE
 * [`ship due UUID DUEDATE`](#ship-due-uuid-duedate)
 * [`ship help [COMMAND]`](#ship-help-command)
 * [`ship note UUID NOTE`](#ship-note-uuid-note)
+* [`ship trash [FILE]`](#ship-trash-file)
 * [`ship view [CATEGORY]`](#ship-view-category)
 
 ## `ship action UUID ACTION [INTENTION]`
@@ -133,6 +134,22 @@ ARGUMENTS
 ```
 
 _See code: [src/commands/note.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/note.ts)_
+
+## `ship trash [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ ship trash [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/trash.ts](https://github.com/ErikAugust/shipyard/blob/v0.1.0/src/commands/trash.ts)_
 
 ## `ship view [CATEGORY]`
 

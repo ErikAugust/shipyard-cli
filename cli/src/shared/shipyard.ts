@@ -51,21 +51,46 @@ export default class Shipyard {
     writeFileSync(this.path, JSON.stringify(shipyard, null, 2));
   }
 
+  /**
+   * Finds an item via shortcode - can be a deeply nested action
+   * @param {string} shortUuid 
+   */
   public findItem(shortUuid: string): Item | undefined {
     if (this.listHasItem(shortUuid)) {
-      // Shallow find:
-      const condition = (element: Item): boolean => element.uuid.slice(0, 6) === shortUuid;
-      const item = this.list.find(condition);
-      if (item) {
-        return item;
+      for (const item of this.list) {
+        // Base case:
+        const condition = item.uuid.slice(0, 6) === shortUuid;
+        if (condition) {
+          return item;
+        } else if (item.actions && item.actions.length) {
+          const nested = this.findNestedItem(shortUuid, item.actions);
+          if (nested) {
+            return nested;
+          }
+        }
       }
-      // Deep find:
-      return undefined;
-    } else {
       return undefined;
     }
   }
 
+  private findNestedItem(shortUuid: string, items: Array<Item>): Item | undefined {
+    for (const item of items) {
+      // Base case:
+      const condition = item.uuid.slice(0, 6) === shortUuid;
+      if (condition) {
+        return item;
+      }
+      if (item.actions && item.actions.length) {
+        return this.findNestedItem(shortUuid, item.actions);
+      }
+    }
+    return undefined;
+  }
+
+  /**
+   * Gleans if list has the ID present via looking at the serialized version
+   * @param {string} shortUuid 
+   */
   public listHasItem(shortUuid: string): boolean {
     return this.file.toString().indexOf(shortUuid) > -1;
   }

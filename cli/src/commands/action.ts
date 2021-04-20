@@ -1,25 +1,58 @@
-import {Command, flags} from '@oclif/command'
+import {Command, flags} from '@oclif/command';
+import chalk from 'chalk';
+import Shipyard from '../shared/shipyard';
+import Item from '../shared/item';
 
+/**
+ * `ship action`: Adds an action to an item
+ * @class Action
+ * @author Erik August Johnson <erik@eaj.io>
+ */
 export default class Action extends Command {
-  static description = 'describe the command here'
+  static description = 'adds an action to specified item';
 
-  static flags = {
-    help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
-  }
+  static args = [
+    {
+      name: 'uuid',
+      required: true,
+      description: 'id of item'
+    },
+    {
+      name: 'action',
+      required: true,
+      description: 'action to add'
+    },
+    {
+      name: 'intention',
+      description: 'intention of action'
+    }
+  ];
 
-  static args = [{name: 'file'}]
-
-  async run() {
-    const {args, flags} = this.parse(Action)
-
-    const name = flags.name ?? 'world'
-    this.log(`hello ${name} from /Users/erikjohnson/Repos/shipyard/cli/src/commands/action.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+  async run(): Promise<void> {
+    try {
+      const {args} = this.parse(Action);
+      const shortUuid = args.uuid?.toLowerCase();
+      // Add action as Item:
+      const action = new Item({
+        title: args.action,
+        intention: args.intention
+      });
+      const shipyard = new Shipyard();
+      
+      // Find item by ID:
+      const item: Item | undefined = shipyard.findItem(shortUuid);
+      if (!item) {
+        this.log(`There are no items found for ${chalk.green.bold(shortUuid)}.\n`);
+        process.exit(0);
+      } else {
+        // Add note and save list:
+        item.addAction(action);
+        this.log(`\nAction added to ${chalk.underline(item.title)} [${chalk.bold(item.getUuidShortcode())}].\n`);
+        shipyard.save();
+      }
+    } catch (error) {
+      this.log('An error has occurred:');
+      console.error(error);
     }
   }
 }

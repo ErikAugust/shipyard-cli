@@ -60,6 +60,15 @@ export default class Item {
   }
 
   /**
+   * Adds/updates/deletes a due date
+   * @param {string} dueDate 
+   * @returns {void}
+   */
+  public addDueDate(dueDate: string): void {
+    this.dueDate = this.getMoment(dueDate);
+  }
+
+  /**
    * Adds note to notes
    * @param {string} note 
    * @returns {void}
@@ -102,5 +111,15 @@ export default class Item {
    */
   public getUuidShortcode(): string {
     return this.uuid.slice(0, 6);
+  }
+
+  /**
+   * Removes due date from item, if exists
+   * @returns {void}
+   */
+  public removeDueDate(): void {
+    if (this.dueDate) {
+      delete this.dueDate;
+    }
   }
 }
