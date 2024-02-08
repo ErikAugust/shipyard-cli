@@ -1,7 +1,7 @@
 {
   "name": "@eaj/shipyard-cli",
   "description": "CLI for Shipyard, the 'Getting Things Done'-inspired productivity (to-do list) system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Erik August Johnson <erik@eaj.io>",
   "bin": {
     "ship": "./bin/run"

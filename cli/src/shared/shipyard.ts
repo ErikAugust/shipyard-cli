@@ -1,5 +1,5 @@
 import {config} from 'dotenv';
-import {readFileSync, writeFileSync} from 'fs';
+import {readFileSync, writeFileSync, existsSync} from 'fs';
 import Item, {DeserializedItem} from '../shared/item';
 import * as os from 'os';
 
@@ -96,10 +96,32 @@ export default class Shipyard {
   }
 
   /**
-   * Loads and deserializes the Shipyard JSON file
+   *  Loads the Shipyard JSON file, creating it if it doesn't exist 
+   * @returns 
    */
   private load(): DeserializedShipyard {
-    this.file = readFileSync(this.path);
+    // Check if the file exists
+    if (!existsSync(this.path)) {
+      // Initialize the file with a default structure
+      const defaultShipyard: DeserializedShipyard = {
+        list: [],
+        archive: [],
+        trash: [],
+        config: {
+          created: new Date().toISOString(),
+        },
+      };
+      // Write the default structure to the file
+      writeFileSync(this.path, JSON.stringify(defaultShipyard, null, 2));
+      // Set the file property to the newly created default structure
+      this.file = Buffer.from(JSON.stringify(defaultShipyard, null, 2));
+    } else {
+      // If the file exists, read it as before
+      this.file = readFileSync(this.path);
+    }
+  
+    // Parse and return the file content
     return JSON.parse(this.file.toString());
   }
+  
 }
